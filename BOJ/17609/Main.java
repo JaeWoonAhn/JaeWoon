@@ -26,51 +26,28 @@ public class Main{
 		}
 	}
 
-	private static boolean checkPalindrome(String A){
-		boolean ret = false;
-		String A1,A2 = new String();
-
-		StringBuilder sb;
-
-		//문자열 길이가 홀수이면서 가운데 문제를 제외하고 회문인 경우
-		if(S.length()%2 == 1){
-			A1 = A.substring(0,A.length()/2);
-			sb = new StringBuilder(A.substring(A.length()/2+1));
-			A2 = sb.reverse().toString();
-			if(A1.equals(A2) == true){
-				ret = true;
-			}
-			else{
-				ret = false;
-			}
+	private static boolean checkPalindrome(String S){
+		int left = 0, right = S.length() - 1;
+		
+		while(left <= right) {
+			if(S.charAt(left++) != S.charAt(right--)) return false;
 		}
-		//문자열 길이가 짝수 중 회문 검색
-		else{
-			A1 = A.substring(0,A.length()/2);
-			sb = new StringBuilder(A.substring(A.length()/2));
-			A2 = sb.reverse().toString();
-			if(A1.equals(A2) == true){
-				ret = true;
-			}
-			else{
-				ret = false;
-			}
-		}
-		return ret;
+		
+		return true;
 	}
-
+		
 	static boolean checkPseudoPal(){
 		int left = 0;
 		int right = N;
 
 		while(left <= right){
 			if(S.charAt(left) != S.charAt(right)){
-				return checkPalindrome(S.substring(left+1,right))||checkPalindrome(S.substring(left,right-1));
+				return checkPalindrome(S.substring(left,right))||checkPalindrome(S.substring(left+1,right+1));
 			}
 			left++;
 			right--;
 		}
-		return true;
+		return false;
 	}
 
 	static int Answer(){
